@@ -3,7 +3,7 @@ from faker import Faker
 import requests
 
 
-from tests.constants import HEADERS, BASE_URL
+from .constants import HEADERS, BASE_URL
 
 faker = Faker()
 
@@ -13,11 +13,11 @@ def auth_session():
     session = requests.Session()
     session.headers.update(HEADERS)
 
-
-
-    auth_response = requests.post(f"{BASE_URL}/auth",
-                             headers=HEADERS,
-                             json={"username": "admin", "password": "password123"})
+    auth_response = requests.post(
+        f"{BASE_URL}/auth",
+        headers=HEADERS,
+        json={"username": "admin", "password": "password123"}
+    )
 
     assert auth_response.status_code == 200, "Ошибка авторизации, статус код не 200"
     token = auth_response.json().get("token")
@@ -76,5 +76,3 @@ def patch_booking_other_data():
         },
         "additionalneeds": "Towels"
     }
-
-

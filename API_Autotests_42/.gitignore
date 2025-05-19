@@ -1,16 +1,7 @@
-# IDE
-.idea/
-.vscode/
-
-# Virtual environment
+echo "__pycache__/
 .venv/
-venv/
-env/
-
-# Python cache
-__pycache__/
-*.py[cod]
-*.class
-
-# Test files
-.pytest_cache/
+*.pyc
+*.pyo
+*.pyd
+.DS_Store
+.env" > .gitignore
