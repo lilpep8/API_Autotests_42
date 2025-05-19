@@ -1,7 +1,0 @@
-echo "__pycache__/
-.venv/
-*.pyc
-*.pyo
-*.pyd
-.DS_Store
-.env" > .gitignore
