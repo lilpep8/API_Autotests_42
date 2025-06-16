@@ -1,4 +1,3 @@
-
 from src.api_clients.api_clietns import BookingApi
 from src.scenarios.scenario import BookingScenarios
 
@@ -26,5 +25,3 @@ class TestBookings:
         scenario = BookingScenarios(api_client=BookingApi(auth_session))
         booking_id = scenario.create_patch_other_data_delete_booking(booking_data, patch_booking_other_data)
         assert booking_id is not None
-
-
