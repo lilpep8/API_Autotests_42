@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from typing import Optional
+from src.utils.data_generator import DataGenerator
 
 
 class BookingDates(BaseModel):
@@ -7,7 +8,7 @@ class BookingDates(BaseModel):
     checkout: str
 
 
-class BookingResponse(BaseModel):
+class BookingModel(BaseModel):
     firstname: str
     lastname: str
     totalprice: int
@@ -23,10 +24,46 @@ class PatchedBookingDates(BaseModel):
 
 
 # Отдельная модель для метода PATCH
-class PatchedBookingResponse(BaseModel):
+class PatchedBookingModel(BaseModel):
     firstname: Optional[str] = None
     lastname: Optional[str] = None
     totalprice: Optional[int] = None
     depositpaid: Optional[bool] = None
     bookingdates: Optional[PatchedBookingDates] = None
     additionalneeds: Optional[str] = None
+
+
+class BookingData:
+
+    @staticmethod
+    def create_booking_data() -> BookingModel:
+        return BookingModel(
+            firstname=DataGenerator.generate_first_name(),
+            lastname=DataGenerator.generate_last_name(),
+            totalprice=DataGenerator.generate_random_int(100, 10000),
+            depositpaid=True,
+            bookingdates=BookingDates(
+                checkin=DataGenerator.generate_random_checkin_date(),
+                checkout=DataGenerator.generate_random_checkout_date()
+            ),
+            additionalneeds=DataGenerator.generate_first_name(),
+        )
+
+    @staticmethod
+    def patch_booking_data_fullname() -> PatchedBookingModel:
+        return PatchedBookingModel(
+            firstname=DataGenerator.generate_first_name(),
+            lastname=DataGenerator.generate_last_name()
+        )
+
+
+    @staticmethod
+    def patch_booking_other_data() -> PatchedBookingModel:
+        return PatchedBookingModel(
+            totalprice=DataGenerator.generate_random_int(100, 10000),
+            bookingdates=PatchedBookingDates(
+                checkin=DataGenerator.generate_random_checkin_date(),
+                checkout=DataGenerator.generate_random_checkout_date()
+            ),
+                additionalneeds=DataGenerator.generate_first_name()
+        )

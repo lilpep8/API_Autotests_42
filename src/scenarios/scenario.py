@@ -1,6 +1,6 @@
 from src.api_clients.api_clietns import BookingApi
 from src.utils.response_validator import validate_response
-from src.data_models.booking_data import BookingResponse, PatchedBookingResponse
+from src.data_models.booking_data import BookingModel, PatchedBookingModel
 
 
 class BookingScenarios:
@@ -8,7 +8,7 @@ class BookingScenarios:
         self.api_client = api_client
 
 
-    def create_put_delete_booking(self, booking_data, updated_booking_data):
+    def create_put_delete_booking(self, booking_data, updated_booking_data) -> int:
         """
         Сценарий: создать букинг, провалидировать данные и схему,
         отредактировать его поля, провалидировать данные и схему,
@@ -22,7 +22,7 @@ class BookingScenarios:
         get_booking_data = self.api_client.get_booking(booking_id)
         validate_response(
             get_booking_data,
-            model=BookingResponse,
+            model=BookingModel,
             expected_data=booking_data.model_dump()
         )
 
@@ -31,7 +31,7 @@ class BookingScenarios:
         get_edited_booking_data = self.api_client.get_booking(booking_id)
         validate_response(
             get_edited_booking_data,
-            model=BookingResponse,
+            model=BookingModel,
             expected_data=updated_booking_data.model_dump()
         )
 
@@ -40,7 +40,7 @@ class BookingScenarios:
         return booking_id
 
 
-    def create_patch_fullname_delete_booking(self, booking_data, updated_booking_data):
+    def create_patch_fullname_delete_booking(self, booking_data, updated_booking_data) -> int:
         """
         Сценарий: создать букинг, провалидировать данные и схему,
         отредактировать фамилию и имя, провалидировать данные и схему,
@@ -54,7 +54,7 @@ class BookingScenarios:
         get_booking_data = self.api_client.get_booking(booking_id)
         validate_response(
             get_booking_data,
-            model=BookingResponse,
+            model=BookingModel,
             expected_data=booking_data.model_dump()
         )
         # PATCH
@@ -62,7 +62,7 @@ class BookingScenarios:
         get_edited_booking_data = self.api_client.get_booking(booking_id)
         validate_response(
             get_edited_booking_data,
-            model=PatchedBookingResponse,
+            model=PatchedBookingModel,
             expected_data=updated_booking_data.model_dump()
         )
 
@@ -72,7 +72,7 @@ class BookingScenarios:
         return booking_id
 
 
-    def create_patch_other_data_delete_booking(self, booking_data, updated_booking_data):
+    def create_patch_other_data_delete_booking(self, booking_data, updated_booking_data) -> int:
         """
         Сценарий: создать букинг, провалидировать данные и схему,
         отредактировать цену, даты, доп.услуги и провалидировать данные и схему,
@@ -87,7 +87,7 @@ class BookingScenarios:
         get_booking_data = self.api_client.get_booking(booking_id)
         validate_response(
             get_booking_data,
-            model=BookingResponse,
+            model=BookingModel,
             expected_data=booking_data.model_dump()
         )
         # PATCH
@@ -95,7 +95,7 @@ class BookingScenarios:
         get_edited_booking_data = self.api_client.get_booking(booking_id)
         validate_response(
             get_edited_booking_data,
-            model=PatchedBookingResponse,
+            model=PatchedBookingModel,
             expected_data=updated_booking_data.model_dump()
         )
 
@@ -106,9 +106,9 @@ class BookingScenarios:
         return booking_id
 
 
-    def get_all_bookings(self):
+    def get_all_bookings(self) -> list:
         """
-        Сценарий: получить список всех букингов и проверить, что он не пуст
+        Сценарий: получить список всех букингов и проверить, что он не пуст.
         Возвращает список букингов
         """
         response = self.api_client.get_bookings()

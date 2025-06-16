@@ -3,7 +3,7 @@ from pydantic import BaseModel, ValidationError
 from requests import Response
 from typing import Type
 
-from src.data_models.booking_data import PatchedBookingResponse
+from src.data_models.booking_data import PatchedBookingModel
 
 
 def validate_response(
@@ -40,7 +40,7 @@ def validate_response(
     # Часть валидатора для метода PATCH
     # Проверяет только заданные поля, игнорируя None
     if expected_data:
-        if issubclass(model, PatchedBookingResponse):
+        if issubclass(model, PatchedBookingModel):
             actual_dict = parsed.model_dump(exclude_unset=True)
             expected_filtered = {k: v for k, v in expected_data.items() if v is not None}
 
@@ -63,4 +63,3 @@ def validate_response(
             )
 
     return parsed
-
