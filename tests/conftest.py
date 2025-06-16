@@ -10,15 +10,16 @@ from src.config.constants import api_config
 faker = Faker()
 
 
+
 @pytest.fixture(scope="session")
 def auth_session():
     session = requests.Session()
-    session.headers.update(api_config.HEADERS)
+        # session.headers.update(api_config.HEADERS)
 
     auth_response = requests.post(
         f"{api_config.BASE_URL}/auth",
         headers=api_config.HEADERS,
-        json={"username": "admin", "password": "password123"}
+        json=api_config.AUTH_DATA
     )
 
     assert auth_response.status_code == 200, "Ошибка авторизации, статус код не 200"

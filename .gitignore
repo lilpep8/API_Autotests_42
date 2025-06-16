@@ -4,7 +4,7 @@ __pycache__/
 
 # Виртуальные окружения
 venv/
-.env/
+.env
 
 # IDE
 .idea/

@@ -19,8 +19,12 @@
    ```bash
    pip install -r requirements.txt
    ```
-
-4. Запустить тесты
+4. Вставить в файл .env-copy свой username и password
+   ```bash
+   API_USERNAME=your_username
+   API_PASSWORD=your_password
+   ```
+5. Запустить тесты
    ```bash
    pytest tests/ -v -s
    ```
