@@ -1,7 +1,6 @@
 # Python кэш
 __pycache__/
 *.py[cod]
-__pycache__
 
 # Виртуальные окружения
 venv/
@@ -10,3 +9,6 @@ venv/
 # IDE
 .idea/
 .vscode/
+*.pyc
+*.pyo
+*.pyd
